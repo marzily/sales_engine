@@ -6,7 +6,7 @@ class SalesEngine
   attr_reader :file_path, :customer_repository
 
   def initialize(file_directory = nil)
-    @file_path = file_path
+    @file_directory = file_directory
   end
 
   def startup

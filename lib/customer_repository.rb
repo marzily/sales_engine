@@ -1,27 +1,18 @@
-# require_relative 'customer'
+require_relative 'customer'
 
 class CustomerRepository
-  attr_reader :csv_data, :headers, :customers
+  attr_reader :customer_data
+  attr_accessor :customers
 
-  def initialize(csv_data)
-    @csv_data   = csv_data
-    @headers = csv_data.headers
-    @customers  = parse_csv_data
+  def initialize(customer_data)
+    @customer_data = customer_data
+    @customers = generate
   end
 
-  def parse_csv_data
-    csv_data.each.map do |row|
-      person_data = headers.length.times.map do |i|
-         [headers[i], row[headers[i]]
-      end
-
-      # p person_data.to_h
-      generate_customer(person_data.to_h)
+  def generate
+    customer_data.map do |person_data|
+      Customer.new(person_data, self)
     end
-  end
-
-  def generate_customer(person_data)
-    Customer.new(person_data)
   end
 
   def all
@@ -29,7 +20,7 @@ class CustomerRepository
   end
 
   def random
-    customers.shuffle.first
+    customers.sample
   end
 
   def find_by_id(id)

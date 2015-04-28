@@ -4,9 +4,9 @@ require './lib/invoice'
 
 class InvoiceTest < Minitest::Test
   def setup
-    @data = {id:          3,
-             customer_id: 1,
-             merchant_id: 78} 
+    @data = { id:          3,
+              customer_id: 1,
+              merchant_id: 78} 
   end
 
   def test_invoice_has_id

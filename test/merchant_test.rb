@@ -18,11 +18,10 @@ class MerchantTest < Minitest::Test
 
   def test_merchant_has_a_name
     merchant = Merchant.new(@data, nil)
-
     assert_equal "Cummings-Thiel", merchant.name
   end
 
-  def test_merchant_has_a_date_of_creation_in_yyyymmdd_hhmmss_format
+  def test_merchant_has_created_at_date_in_yyyymmdd_hhmmss_format
     merchant = Merchant.new(@data, nil)
 
     assert_equal "2012-03-27 14:54:00 UTC", merchant.created_at

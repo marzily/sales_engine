@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 
 class Parser
   attr_reader :csv_object
@@ -10,4 +9,3 @@ class Parser
 end
 
 parsed = Parser.new('./test/fixtures/customers.csv')
-binding.pry

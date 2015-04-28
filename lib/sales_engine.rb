@@ -16,7 +16,7 @@ class SalesEngine
     invoice_data = parser.parse('invoices.csv')
     # @csv_object = CSV.open file_path, headers: true, header_converters: :symbol`
     @customer_repo = CustomerRepository.new(customer_data, self)
-    @invoice_repo = InvoiceRepository.new(invoice_data, self)
+    # @invoice_repo = InvoiceRepository.new(invoice_data, self)
 
   end
 

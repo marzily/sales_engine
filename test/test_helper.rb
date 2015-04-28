@@ -1,7 +1,10 @@
 require "minitest"
 require "minitest/autorun"
 require 'minitest/pride'
+require 'require_all'
 
-require './lib/parser'
+require './lib/sales_engine'
 require './lib/customer'
-require './lib/invoice'
+require './lib/customer_repository'
+# require './test/fixtures/customers.csv'
+# require './lib/invoice'

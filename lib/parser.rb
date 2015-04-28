@@ -1,13 +1,9 @@
 require 'csv'
-require 'pry'
 
-class Parser
-  attr_reader :csv_object
+module Parser
 
-  def initialize(file_path)
-    @csv_object = CSV.open file_path, headers: true, header_converters: :symbol
+  def parse(file_path)
+    CSV.open(file_path), headers: true, header_converters: :symbol
   end
 end
 
-parsed = Parser.new('./test/fixtures/customers.csv')
-binding.pry

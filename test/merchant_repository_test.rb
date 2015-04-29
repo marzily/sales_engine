@@ -35,4 +35,15 @@ class MerchantRepositoryTest < Minitest::Test
 
     assert merchant_repo.random
   end
+
+  def test_it_can_find_merchants_by_name
+    merchant_repo = MerchantRepository.new(fixtures, nil)
+    result        = merchant_repo.find_by_name('Hand-Spencer')
+
+    assert_equal 9, result.id
+  end
 end
+
+
+
+

@@ -1,29 +1,24 @@
 require_relative 'parser'
 require_relative 'customer'
-
+# require_relative 'merchant'
+# require_relative 'invoice'
+# require_relative 'item'
+# require_relative 'transaction'
+# require_relative 'invoice_item'
 
 class Repository
   include Parser
 
-  attr_reader :data, :collection, :engine
+  attr_reader :collection, :engine
 
-  def initialize(file_path, engine)
-    @data       = parse(file_path)
-    @collection = generate
+  def initialize(data, engine)
+    @collection = generate(data)
     @engine     = engine
   end
 
-  def generate
-    class_repos = { CustomerRepository => Customer,
-                    # MerchantRepository: Merchant,
-                    # InvoiceRepository: Invoice,
-                    # InvoiceItemRepository: Invoice_Item,
-                    # ItemRepository: Item,
-                    # TransactionRepository: Transaction }
-                  }
-
+  def generate(data)
     data.map do |object_data|
-      class_repos[self.class].new(object_data, self)
+      model_class.new(object_data, self)
     end
   end
 
@@ -46,7 +41,7 @@ class Repository
   def find_by_updated_at(time_stamp)
     collection.find { |object| object.updated_at == time_stamp }
   end
-end
 
-# r = Repository.new('./test/fixtures/customers.csv', nil)
-# p r.collection
+
+
+end

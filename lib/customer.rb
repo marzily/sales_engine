@@ -1,5 +1,7 @@
 class Customer
-  attr_reader :id, :first_name, :last_name, :created_at, :updated_at, :repository
+
+  attr_reader :id, :created_at, :repository
+  attr_accessor :first_name, :last_name, :updated_at
 
   def initialize(data, repository)
     @id         = data[:id].to_i

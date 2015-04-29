@@ -24,4 +24,21 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal "Sylvester", @repo.find_by_id(5).first_name
   end
 
+  def test_it_finds_a_customer_by_first_name
+    assert_equal 5, @repo.find_by_first_name("SylVEster").id
+  end
+
+  def test_it_finds_a_customer_by_first_name
+    assert_equal 5, @repo.find_by_last_name("NaDer").id
+  end
+
+  def test_it_finds_a_customer_by_created_at_time_stamp
+    assert_equal 1, @repo.find_by_created_at("2012-03-27 14:54:09 UTC").id
+  end
+
+  def test_it_finds_a_customer_by_updated_at_time_stamp
+    assert_equal 1, @repo.find_by_updated_at("2012-03-27 14:54:09 UTC").id
+  end
+
+
 end

@@ -2,6 +2,7 @@ require 'csv'
 require_relative 'customer'
 require_relative 'customer_repository'
 require_relative 'parser'
+require_relative 'invoice_repository'
 
 class SalesEngine
   include Parser
@@ -15,19 +16,16 @@ class SalesEngine
   end
 
   def startup
-    parser         = Parser.new(file_directory)
-    customer_data  = parser.parse(file_directory + 'customers.csv')
-    invoice_data   = parser.parse(file_directory + 'invoices.csv')
-    # './test/fixtures/customers.csv'
-    # || './data/'
+    customer_data  = parse(file_directory + 'customers.csv')
+    invoice_data   = parse(file_directory + 'invoices.csv')
     @customer_repo = CustomerRepository.new(customer_data, self)
-    @invoice_repo  = InvoiceRepository.new(invoice_data, self)
+    @invoice_repository  = InvoiceRepository.new(invoice_data, self)
   end
 
 end
 
-engine = SalesEngine.new('./test/fixtures/customers.csv')
-csv = engine.startup
-csv.each do |c|
-  p c
-end
+# engine = SalesEngine.new('./test/fixtures/')
+# csv = engine.startup
+# csv.each do |c|
+#   p c
+# end

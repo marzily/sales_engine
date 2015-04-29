@@ -9,11 +9,7 @@ class CustomerTest < Minitest::Test
               created_at: "2012-03-27 14:54:09 UTC",
               updated_at: "2012-03-27 14:54:09 UTC"
       }
-    @customer = Customer.new(data)
-  end
-
-  def test_it_creates_an_instance_of_customer
-    assert_instance_of Customer, @customer
+    @customer = Customer.new(data, nil)
   end
 
   def test_customer_has_an_id

@@ -7,12 +7,12 @@ require_relative 'customer_repository'
 
 class SalesEngine
   attr_reader :file_directory,
-              :customer_repository
+              :customer_repository,
             # , :invoice_repository,
               # :merchant_repository,
               # :item_repository,
-              # :invoice_item_repository,
-              # :transaction_repository
+              :invoice_item_repository
+              #, :transaction_repository
 
   def initialize(file_directory = nil)
     @file_directory = file_directory
@@ -22,7 +22,7 @@ class SalesEngine
     @customer_repository = CustomerRepository.new("#{file_directory}customers.csv", self)
     # @invoice_repository = InvoiceRepository.new("#{file_directory}invoices.csv", self)
     # @item_repository = ItemRepository.new("#{file_directory}items.csv", self)
-    # @invoice_item_repository = InvoiceItemRepository.new("#{file_directory}invoice_items.csv", self)
+    @invoice_item_repository = InvoiceItemRepository.new("#{file_directory}invoice_items.csv", self)
     # @merchant_repository = MerchantRepository.new("#{file_directory}merchants.csv", self)
     # @transaction_repository = TransactionRepository.new("#{file_directory}transactions.csv", self)
   end

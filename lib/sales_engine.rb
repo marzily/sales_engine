@@ -1,5 +1,5 @@
 require_relative 'customer_repository'
-# require_relative 'invoice_repository'
+require_relative 'invoice_repository'
 # require_relative 'merchant_repository'
 # require_relative 'item_repository'
 # require_relative 'invoice_item_repository'
@@ -27,7 +27,6 @@ class SalesEngine
     # @transaction_repository = TransactionRepository.new("#{file_directory}transactions.csv", self)
   end
 end
-
 
 if __FILE__ == $PROGRAM_NAME
   engine = SalesEngine.new('./test/fixtures/')

@@ -1,33 +1,36 @@
-require 'csv'
-require_relative 'customer'
 require_relative 'customer_repository'
-require_relative 'parser'
+# require_relative 'invoice_repository'
+# require_relative 'merchant_repository'
+# require_relative 'item_repository'
+# require_relative 'invoice_item_repository'
+# require_relative 'transaction_repository'
 
 class SalesEngine
-  include Parser
-  
-  attr_reader :file_directory, 
+  attr_reader :file_directory,
               :customer_repository,
-              :invoice_repository
+            # , :invoice_repository,
+              # :merchant_repository,
+              # :item_repository,
+              :invoice_item_repository
+              #, :transaction_repository
 
   def initialize(file_directory = nil)
     @file_directory = file_directory
   end
 
   def startup
-    parser         = Parser.new(file_directory)
-    customer_data  = parser.parse(file_directory + 'customers.csv')
-    invoice_data   = parser.parse(file_directory + 'invoices.csv')
-    # './test/fixtures/customers.csv'
-    # || './data/'
-    @customer_repo = CustomerRepository.new(customer_data, self)
-    @invoice_repo  = InvoiceRepository.new(invoice_data, self)
+    @customer_repository = CustomerRepository.new("#{file_directory}customers.csv", self)
+    # @invoice_repository = InvoiceRepository.new("#{file_directory}invoices.csv", self)
+    # @item_repository = ItemRepository.new("#{file_directory}items.csv", self)
+    @invoice_item_repository = InvoiceItemRepository.new("#{file_directory}invoice_items.csv", self)
+    # @merchant_repository = MerchantRepository.new("#{file_directory}merchants.csv", self)
+    # @transaction_repository = TransactionRepository.new("#{file_directory}transactions.csv", self)
   end
-
 end
 
-engine = SalesEngine.new('./test/fixtures/customers.csv')
-csv = engine.startup
-csv.each do |c|
-  p c
+
+if __FILE__ == $PROGRAM_NAME
+  engine = SalesEngine.new('./test/fixtures/')
+  engine.startup
+  engine.customer_repository
 end

@@ -27,6 +27,25 @@ class CustomerRepository
   end
 
   def find_by_id(id)
-    customers.select { |customer| customer.id == id }.first
+    customers.find { |customer| customer.id == id }
   end
+
+  def find_by_first_name(first_name)
+    customers.find { |customer| customer.first_name.downcase == first_name.downcase }
+  end
+
+  def find_by_last_name(last_name)
+    customers.find { |customer| customer.last_name.downcase == last_name.downcase }
+  end
+
+  def find_by_created_at(time_stamp)
+    customers.find { |customer| customer.created_at == time_stamp }
+  end
+
+  def find_by_updated_at(time_stamp)
+    customers.find { |customer| customer.updated_at == time_stamp }
+  end
+
+  find_all_by attr
+
 end

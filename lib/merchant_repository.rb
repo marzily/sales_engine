@@ -18,4 +18,7 @@ class MerchantRepository
   def random
     merchants.sample
   end
+
+  def find_by_name
+  end
 end

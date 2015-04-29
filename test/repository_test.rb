@@ -33,4 +33,16 @@ class RepositoryTest < Minitest::Test
   def test_it_finds_a_customer_by_updated_at_time_stamp
     assert_equal 1, repo.find_by_updated_at("2012-03-27 14:54:09 UTC").id
   end
+
+  def test_it_finds_all_by_created_at_time_stamp
+    assert_equal 3, repo.find_all_by_created_at("2012-03-27 14:54:11 UTC").count
+  end
+
+  def test_it_finds_all_by_updated_at_time_stamp
+    assert_equal 6, repo.find_all_by_updated_at("2012-03-27 14:54:10 UTC").count
+  end
+
+  def find_all_by_id
+    assert_equal 1, repo.find_all_by_id(7).count
+  end
 end

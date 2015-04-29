@@ -31,17 +31,27 @@ class Repository
   end
 
   def find_by_id(id)
-    collection.find { |object| object.id == id }
+    find_all_by_id(id).first
+  end
+
+  def find_all_by_id(id)
+    collection.select {|object| object.id == id}
   end
 
   def find_by_created_at(time_stamp)
-    collection.find { |object| object.created_at == time_stamp }
+    find_all_by_created_at(time_stamp).first
+  end
+
+  def find_all_by_created_at(time_stamp)
+    collection.select {|object| object.created_at == time_stamp}
   end
 
   def find_by_updated_at(time_stamp)
-    collection.find { |object| object.updated_at == time_stamp }
+    find_all_by_created_at(time_stamp).first
   end
 
-
+  def find_all_by_updated_at(time_stamp)
+    collection.select {|object| object.updated_at == time_stamp}
+  end
 
 end

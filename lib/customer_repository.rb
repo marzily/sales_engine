@@ -3,7 +3,7 @@ require_relative 'customer'
 
 class CustomerRepository < Repository
   # attr_accessor :model_class
-  
+
   # def initialize(data, engine)
   #   super
   #   @model_class = Customer

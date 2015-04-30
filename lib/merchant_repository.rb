@@ -1,24 +1,12 @@
-require './lib/parser'
-require './lib/merchant'
+require_relative 'repository'
+require_relative 'merchant'
 
-class MerchantRepository
-  attr_reader :merchants, :engine
-
-  include Parser
-
-  def initialize(data, engine)
-    @engine    = engine
-    @merchants = data.map { |line| Merchant.new(line, self) }
+class MerchantRepository < Repository
+  def model_class
+    Merchant
   end
 
-  def all
-    merchants
-  end
-
-  def random
-    merchants.sample
-  end
-
-  def find_by_name
+  def find_by_name(name)
+    collection.find { |merchant| merchant.name == name}
   end
 end

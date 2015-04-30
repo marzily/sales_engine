@@ -1,5 +1,5 @@
-require './lib/parser'
-require './lib/invoice'
+require_relative 'repository'
+require_relative 'invoice'
 
 class InvoiceRepository < Repository
   def model_class

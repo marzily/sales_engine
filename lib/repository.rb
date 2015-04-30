@@ -1,10 +1,4 @@
 require_relative 'parser'
-require_relative 'customer'
-# require_relative 'merchant'
-# require_relative 'invoice'
-# require_relative 'item'
-# require_relative 'transaction'
-# require_relative 'invoice_item'
 
 class Repository
   include Parser

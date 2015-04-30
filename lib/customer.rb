@@ -1,14 +1,14 @@
-class Customer
+require_relative 'instance_object'
 
-  attr_reader :id, :created_at, :repository
-  attr_accessor :first_name, :last_name, :updated_at
+class Customer < InstanceObject
+
+  attr_reader :repository
+  attr_accessor :first_name, :last_name
 
   def initialize(data, repository)
-    @id         = data[:id].to_i
+    super(data)
     @first_name = data[:first_name]
     @last_name  = data[:last_name]
-    @created_at = data[:created_at]
-    @updated_at = data[:updated_at]
     @repository = repository
   end
 

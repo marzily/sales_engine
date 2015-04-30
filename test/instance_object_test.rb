@@ -7,7 +7,7 @@ class InstanceObjectTest < Minitest::Test
               created_at: "2012-05-27 14:54:09 UTC",
               updated_at: "2012-06-27 14:54:09 UTC"
             }
-    @instance_object = InstanceObject.new(data)
+    @instance_object = InstanceObject.new(data, nil)
   end
 
   def test_customer_has_an_id

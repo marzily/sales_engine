@@ -3,7 +3,7 @@ require './test/test_helper'
 class InvoiceItemTest < Minitest::Test
 
   def setup
-    data = {  id: "1",
+    data = {  id: "14",
               item_id: "539",
               invoice_id: "1",
               quantity: "5",
@@ -15,8 +15,11 @@ class InvoiceItemTest < Minitest::Test
     @invoice_item = InvoiceItem.new(data, nil)
   end
 
-  def test_it_has_an_id
-    assert_equal 1, @invoice_item.id
+  def test_it_initializes_with_instance_object_attributes
+    assert_equal 14, @invoice_item.id
+    assert_equal "2012-03-27 14:54:09 UTC", @invoice_item.created_at
+    assert_equal "2012-03-27 14:54:09 UTC", @invoice_item.updated_at
+    assert_nil @invoice_item.repository
   end
 
   def test_it_has_an_item_id
@@ -33,19 +36,6 @@ class InvoiceItemTest < Minitest::Test
 
   def test_it_has_a_unit_price
     assert_equal 13635, @invoice_item.unit_price
-  end
-
-  def test_it_has_a_created_at_time_stamp
-    assert_equal "2012-03-27 14:54:09 UTC", @invoice_item.created_at
-  end
-
-  def test_it_has_an_updated_at_time_stamp
-    assert_equal "2012-03-27 14:54:09 UTC", @invoice_item.updated_at
-  end
-
-  def test_updated_at_time_stamp_can_be_changed
-    @invoice_item.updated_at = "2015-04-30 14:54:09 UTC"
-    refute_equal "2012-03-27 14:54:09 UTC", @invoice_item.updated_at
   end
 
 end

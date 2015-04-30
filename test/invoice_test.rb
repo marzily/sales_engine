@@ -3,27 +3,32 @@ require 'minitest/pride'
 require './lib/invoice'
 
 class InvoiceTest < Minitest::Test
+  attr_reader :invoice
+
   def setup
-    @data = { id:          "3",
+    data = {  id:          "3",
               customer_id: "1",
-              merchant_id: "78"} 
+              merchant_id: "78",
+              status:      "shipped"
+            } 
+    @invoice = Invoice.new(data, nil)
   end
 
   def test_invoice_has_id
-    invoice = Invoice.new(@data)
-
     assert_equal 3, invoice.id
   end
 
   def test_invoice_has_customer_id
-    invoice = Invoice.new(@data)
-
     assert_equal 1, invoice.customer_id
   end
 
   def test_invoice_has_merchant_id
-    invoice = Invoice.new(@data)
-
     assert_equal 78, invoice.merchant_id
   end
+
+  def test_invoice_has_status
+    assert_equal "shipped", invoice.status
+  end
+
+  def test_invoice_status_can_change
 end

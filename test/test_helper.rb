@@ -1,4 +1,3 @@
-require "minitest"
 require "minitest/autorun"
 require 'minitest/pride'
 
@@ -10,3 +9,5 @@ require './lib/invoice_item_repository'
 require './lib/repository'
 # require './lib/parser'
 require './lib/model_object'
+require './lib/item'
+require './lib/merchant'

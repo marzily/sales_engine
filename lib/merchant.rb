@@ -1,14 +1,10 @@
-class Merchant
-  attr_reader :id,
-              :name,
-              :created_at,
-              :updated_at,
-              :repository
+require_relative 'model_object'
+
+class Merchant < ModelObject
+  attr_reader :name
 
   def initialize(data, merchant_repo)
-    @id          = data[:id].to_i
-    @name        = data[:name]
-    @created_at  = data[:created_at]
-    @updated_at  = data[:updated_at]
+    super
+    @name = data[:name]
   end
 end

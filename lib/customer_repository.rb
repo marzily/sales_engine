@@ -1,7 +1,15 @@
-require_relative 'customer'
 require_relative 'repository'
+require_relative 'customer'
 
 class CustomerRepository < Repository
+  # attr_reader :model_class
+  #
+  # def initialize(data, engine)
+  #   super
+  #   @model_class = Customer
+  # end
+
+# why does this break class???
 
   def model_class
     Customer

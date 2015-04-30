@@ -1,3 +1,4 @@
+require_relative 'parser'
 require_relative 'customer_repository'
 # require_relative 'item_repository'
 # require_relative 'invoice_repository'
@@ -6,6 +7,8 @@ require_relative 'customer_repository'
 # require_relative 'transaction_repository'
 
 class SalesEngine
+  include Parser
+
   attr_reader :file_directory,
               :customer_repository,
             # :invoice_repository,

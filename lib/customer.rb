@@ -1,6 +1,6 @@
-require_relative 'instance_object'
+require_relative 'model_object'
 
-class Customer < InstanceObject
+class Customer < ModelObject
 
   attr_accessor :first_name, :last_name
 

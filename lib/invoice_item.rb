@@ -1,8 +1,9 @@
-require_relative 'instance_object'
+require_relative 'model_object'
 
-class InvoiceItem < InstanceObject
+class InvoiceItem < ModelObject
 
   attr_reader :item_id, :invoice_id
+  # can item id and invoice id be updated?
   attr_accessor :quantity, :unit_price
 
   def initialize(data, repository)

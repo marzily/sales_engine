@@ -1,4 +1,4 @@
-class InstanceObject
+class ModelObject
 
   attr_reader :id, :created_at, :repository
   attr_accessor :updated_at

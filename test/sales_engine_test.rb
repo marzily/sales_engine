@@ -1,5 +1,4 @@
 require './test/test_helper'
-require 'csv'
 
 class SalesEngineTest < Minitest::Test
 
@@ -13,10 +12,12 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_it_loads_customer_repo_dependencies
+    skip
     assert_equal 10, @engine.customer_repository.all.count
   end
 
   def test_customer_repository_loads_the_correct_csv_file
+    skip
     assert_equal "Joey", @engine.customer_repository.find_by_id(1).first_name
   end
 

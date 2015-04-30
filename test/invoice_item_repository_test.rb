@@ -2,26 +2,45 @@ require './test/test_helper'
 require 'csv'
 
 class InvoiceItemRepositoryTest < Minitest::Test
+  include Parser
+
+  attr_reader :repo
 
   def setup
-    engine = SalesEngine.new('./test/fixtures/')
-    engine.startup
-    @repo = engine.invoice_item_repository
+    customer_data = parse("./test/fixtures/invoice_items.csv")
+    @repo = InvoiceItemRepository.new(customer_data, nil)
   end
 
-  def test_it_returns_all_invoice_items
-    assert_equal 10, @repo.all.count
-    assert_equal 539, @repo.all.first.item_id
-    assert_equal 1830, @repo.all.last.item_id
+  def test_it_finds_all_invoice_items_by_item_id
+    assert_equal 1, @repo.find_all_by_item_id(535).count
   end
 
-  def test_it_returns_a_random_invoice_item
-    sample = 10.times.map { |i| @repo.random.item_id }
-    refute sample.all? { |name| name == sample.first }
+  def test_it_finds_first_invoice_item_by_item_id
+    assert_equal 4, @repo.find_by_item_id(535).id
   end
 
-  def test_it_finds_a_invoice_item_by_id
-    assert_equal 529, @repo.find_by_id(5).item_id
+  def test_it_finds_all_invoice_items_by_invoice_id
+    assert_equal 8, @repo.find_all_by_invoice_id(1).count
+  end
+
+  def test_it_finds_first_invoice_item_by_invoice_id
+    assert_equal 1, @repo.find_by_invoice_id(1).id
+  end
+
+  def test_it_finds_all_invoice_items_by_quantity
+    assert_equal 2, @repo.find_all_by_quantity(6).count
+  end
+
+  def test_it_finds_first_invoice_item_by_quantity
+    assert_equal 8, @repo.find_by_quantity(6).id
+  end
+
+  def test_it_finds_all_invoice_items_by_unit_price
+    assert_equal 1, @repo.find_all_by_unit_price(52100).count
+  end
+
+  def test_it_finds_first_invoice_item_by_unit_price
+    assert_equal 6, @repo.find_by_unit_price(52100).id
   end
 
 end

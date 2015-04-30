@@ -1,32 +1,42 @@
-require_relative 'parser'
+require_relative 'repository'
 require_relative 'invoice_item'
 
-class InvoiceItemRepository
-  include Parser
+class InvoiceItemRepository < Repository
 
-  attr_reader :invoice_items_data, :invoice_items, :engine
-
-  def initialize(invoice_items_csv, engine)
-    @invoice_items_data = parse(invoice_items_csv)
-    @invoice_items      = generate
-    @engine             = engine
+  def model_class
+    InvoiceItem
   end
 
-  def generate
-    invoice_items_data.map do |invoice_item_data|
-      InvoiceItem.new(invoice_item_data, self)
-    end
+  def find_all_by_item_id(item_id)
+    collection.select { |invoice_item| invoice_item.item_id == item_id }
   end
 
-  def all
-    invoice_items
+  def find_by_item_id(item_id)
+    find_all_by_item_id(item_id).first
   end
 
-  def random
-    invoice_items.sample
+  def find_all_by_invoice_id(invoice_id)
+    collection.select { |invoice_item| invoice_item.invoice_id == invoice_id }
   end
 
-  def find_by_id(id)
-    invoice_items.select { |invoice_item| invoice_item.id == id }.first
+  def find_by_invoice_id(invoice_id)
+    find_all_by_invoice_id(invoice_id).first
   end
+
+  def find_all_by_quantity(quantity)
+    collection.select { |invoice_item| invoice_item.quantity == quantity }
+  end
+
+  def find_by_quantity(quantity)
+    find_all_by_quantity(quantity).first
+  end
+
+  def find_all_by_unit_price(unit_price)
+    collection.select { |invoice_item| invoice_item.unit_price == unit_price }
+  end
+
+  def find_by_unit_price(unit_price)
+    find_all_by_unit_price(unit_price).first
+  end
+
 end

@@ -1,7 +1,4 @@
-require_relative 'parser'
-
 class Repository
-  include Parser
 
   attr_reader :collection, :engine
 

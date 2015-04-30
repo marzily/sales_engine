@@ -13,7 +13,7 @@ class RepositoryTest < Minitest::Test
 
   def test_it_returns_all_customers
 
-    data = [{id :1 , created_at: }, {id :2}]
+    # data = [{id :1 , created_at: }, {id :2}]
     assert_equal 10, repo.all.count
     assert_equal 1, repo.all.first.id
     assert_equal 10, repo.all.last.id

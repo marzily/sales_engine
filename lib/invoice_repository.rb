@@ -2,28 +2,15 @@ require './lib/parser'
 require './lib/invoice'
 
 class InvoiceRepository < Repository
-  # attr_reader :invoices, :engine
-  #
-  # include Parser
-  #
-  # def initialize(data, engine)
-  #   @engine   = engine
-  #   @invoices = data.map {|line| Invoice.new(line, self)}
-  # end
-  #
-  # def all
-  #   invoices
-  # end
-  #
-  # def random
-  #   invoices.sample
-  # end
+  def model_class
+    Invoice
+  end
 
-  # def find_by_id(id)
-  #   invoices.find { |invoice| invoice.id == id }
-  # end
+  def find_by_customer_id(customer_id)
+    collection.find{ |invoice| invoice.customer_id == customer_id}
+  end
 
   def find_by_merchant_id(merchant_id)
-      invoices.find { |invoice| invoice.merchant_id == merchant_id }
+    collection.find { |invoice| invoice.merchant_id == merchant_id }
   end
 end

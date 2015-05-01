@@ -42,4 +42,20 @@ class ItemTest < Minitest::Test
   def test_item_has_merchant_id
     assert_equal 3, item.merchant_id
   end
+
+  def test_invoice_items_returns_all_invoice_items_for_item
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    item = engine.item_repository.collection.first
+
+    assert_equal 0, item.invoice_items.count
+  end  
+
+  def test_merchant_returns_a_merchant_for_item
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    item = engine.item_repository.collection.first
+
+    assert_equal 1, item.merchant.id
+  end
 end

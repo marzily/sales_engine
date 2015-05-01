@@ -14,5 +14,9 @@ class Transaction < ModelObject
     @cc_expiration_date = data[:cc_expiration_date]
     @result             = data[:result]
   end
+
+  def invoice
+    repository.engine.invoice_repository.find_by_id(invoice_id)
+  end
   
 end

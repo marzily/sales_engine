@@ -14,5 +14,13 @@ class Item < ModelObject
     @unit_price  = data[:unit_price].to_i
     @merchant_id = data[:merchant_id].to_i
   end
+
+  def invoice_items
+    repository.engine.invoice_item_repository.find_all_by_item_id(id)
+  end
+
+  def merchant
+    repository.engine.merchant_repository.find_by_id(merchant_id)
+  end
   
 end

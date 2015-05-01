@@ -42,4 +42,12 @@ class TransactionTest < Minitest::Test
   def test_transaction_has_updated_date_in_yyymmdd__hhmmss_format
     assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
   end
+
+  def test_invoice_returns_a_invoice_for_transaction
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    transaction = engine.transaction_repository.collection.first
+
+    assert_equal 1, transaction.invoice.id
+  end
  end

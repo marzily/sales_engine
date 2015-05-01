@@ -34,5 +34,13 @@ class MerchantTest < Minitest::Test
     merchant = engine.merchant_repository.collection.first
 
     assert_equal 10, merchant.items.count
+  end  
+
+  def test_items_returns_all_invoices_for_merchant
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    merchant = engine.merchant_repository.collection.first
+
+    assert_equal 8, merchant.invoices.count
   end
 end

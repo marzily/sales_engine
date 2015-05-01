@@ -2,7 +2,7 @@ require './test/test_helper'
 
 class TransactionTest < Minitest::Test
   attr_reader :transaction
-# id,invoice_id,credit_card_number,credit_card_expiration_date,result,created_at,updated_at
+  
   def setup
     data = {  id:                 "1",
               invoice_id:         "1",

@@ -10,10 +10,18 @@ class InvoiceRepository < Repository
   end
 
   def find_by_customer_id(customer_id)
-    collection.find{ |invoice| invoice.customer_id == customer_id}
+    find_all_by_customer_id(customer_id).first
   end
 
   def find_by_merchant_id(merchant_id)
-    collection.find { |invoice| invoice.merchant_id == merchant_id }
+    find_all_by_merchant_id(merchant_id).first
+  end
+
+  def find_all_by_customer_id(customer_id)
+    collection.select{ |invoice| invoice.customer_id == customer_id}
+  end
+
+  def find_all_by_merchant_id(merchant_id)
+    collection.select { |invoice| invoice.merchant_id == merchant_id }
   end
 end

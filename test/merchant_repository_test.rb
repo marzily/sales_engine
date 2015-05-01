@@ -16,6 +16,10 @@ class MerchantRepositoryTest < Minitest::Test
 
     assert_equal 9, invoice_object.id
   end
+
+  def test_it_can_find_all_merchants_by_name
+    assert_equal 1, repo.find_all_by_name("Schroeder-Jerde").count
+  end
 end
 
 

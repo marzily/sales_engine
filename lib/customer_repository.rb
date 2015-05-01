@@ -2,17 +2,11 @@ require_relative 'repository'
 require_relative 'customer'
 
 class CustomerRepository < Repository
-  # attr_accessor :model_class
+  attr_reader :model_class
 
-  # def initialize(data, engine)
-  #   super
-  #   @model_class = Customer
-  # end
-
-# why does this break class???
-
-  def model_class
-    Customer
+  def initialize(data, engine)
+    @model_class = Customer
+    super
   end
 
   def find_by_first_name(first_name)

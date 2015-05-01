@@ -1,9 +1,10 @@
 require_relative 'model_object'
 
 class Transaction < ModelObject
-  attr_reader :invoice_id, 
-              :credit_card_number, 
-              :cc_expiration_date, 
+
+  attr_reader :invoice_id,
+              :credit_card_number,
+              :cc_expiration_date,
               :result
 
   def initialize(data, item_repo)
@@ -13,4 +14,5 @@ class Transaction < ModelObject
     @cc_expiration_date = data[:cc_expiration_date]
     @result             = data[:result]
   end
+  
 end

@@ -1,8 +1,8 @@
 require_relative 'model_object'
 
 class Invoice < ModelObject
-  attr_reader :customer_id, :merchant_id
-  attr_accessor :status
+
+  attr_reader :customer_id, :merchant_id, :status
 
   def initialize(data, invoice_repo)
     super
@@ -10,4 +10,5 @@ class Invoice < ModelObject
     @merchant_id = data[:merchant_id].to_i
     @status      = data[:status]
   end
+  
 end

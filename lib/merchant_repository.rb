@@ -2,8 +2,11 @@ require_relative 'repository'
 require_relative 'merchant'
 
 class MerchantRepository < Repository
-  def model_class
-    Merchant
+  attr_reader :model_class
+
+  def initialize(data, engine)
+    @model_class = Merchant
+    super
   end
 
   def find_by_name(name)

@@ -2,9 +2,11 @@ require_relative 'repository'
 require_relative 'item'
 
 class ItemRepository < Repository
+  attr_reader :model_class
 
-  def model_class
-    Item
+  def initialize(data, engine)
+    @model_class = Item
+    super
   end
 
   def find_all_by_name(name)

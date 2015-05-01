@@ -2,8 +2,11 @@ require_relative 'repository'
 require_relative 'invoice'
 
 class InvoiceRepository < Repository
-  def model_class
-    Invoice
+  attr_reader :model_class
+
+  def initialize(data, engine)
+    @model_class = Invoice
+    super
   end
 
   def find_by_customer_id(customer_id)

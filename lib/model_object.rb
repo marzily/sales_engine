@@ -1,7 +1,6 @@
 class ModelObject
 
-  attr_reader :id, :created_at, :repository
-  attr_accessor :updated_at
+  attr_reader :id, :created_at, :updated_at, :repository
 
   def initialize(data, repository)
     @id         = data[:id].to_i

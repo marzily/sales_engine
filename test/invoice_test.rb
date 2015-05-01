@@ -10,7 +10,7 @@ class InvoiceTest < Minitest::Test
               customer_id: "1",
               merchant_id: "78",
               status:      "shipped"
-            } 
+            }
     @invoice = Invoice.new(data, nil)
   end
 
@@ -29,6 +29,5 @@ class InvoiceTest < Minitest::Test
   def test_invoice_has_status
     assert_equal "shipped", invoice.status
   end
-
-  def test_invoice_status_can_change
+  
 end

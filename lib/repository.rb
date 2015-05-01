@@ -1,3 +1,5 @@
+require_relative 'model_object'
+
 class Repository
 
   attr_reader :collection, :engine
@@ -38,7 +40,7 @@ class Repository
   end
 
   def find_by_updated_at(time_stamp)
-    find_all_by_created_at(time_stamp).first
+    find_all_by_updated_at(time_stamp).first
   end
 
   def find_all_by_updated_at(time_stamp)

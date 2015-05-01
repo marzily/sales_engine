@@ -2,7 +2,7 @@ require_relative 'model_object'
 
 class Customer < ModelObject
 
-  attr_accessor :first_name, :last_name
+  attr_reader :first_name, :last_name
 
   def initialize(data, repository)
     super

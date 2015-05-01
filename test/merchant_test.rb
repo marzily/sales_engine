@@ -27,4 +27,12 @@ class MerchantTest < Minitest::Test
   def test_merchant_has_updated_date_in_yyymmdd__hhmmss_format
     assert_equal "2012-03-27 14:54:00 UTC", merchant.updated_at
   end
+
+  def test_items_returns_all_items_for_merchant
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    merchant = engine.merchant_repository.collection.first
+
+    assert_equal 10, merchant.items.count
+  end
 end

@@ -12,4 +12,12 @@ class InvoiceItem < ModelObject
     @unit_price = data[:unit_price].to_i
   end
 
+  def invoice
+    repository.find_by_invoice_id(invoice_id)
+  end
+
+  def item
+    repository.find_by_item_id(item_id)
+  end
+
 end

@@ -10,4 +10,8 @@ class Customer < ModelObject
     @last_name  = data[:last_name]
   end
 
+  def invoices
+    repository.engine.invoice_repository.find_all_by_customer_id(id)
+  end
+
 end

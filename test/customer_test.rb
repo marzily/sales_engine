@@ -27,4 +27,13 @@ class CustomerTest < Minitest::Test
   def test_customer_has_a_last_name
     assert_equal 'Ondricka', customer.last_name
   end
+
+  def test_it_returns_all_invoices_for_customer
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    customer1 = engine.customer_repository.collection.first
+
+    assert_equal 8, customer1.invoices.count
+  end
+
 end

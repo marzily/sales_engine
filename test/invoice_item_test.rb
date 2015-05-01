@@ -50,7 +50,7 @@ class InvoiceItemTest < Minitest::Test
     engine.startup
     invoice_item = engine.invoice_item_repository.collection.first
 
-    assert_equal 1, invoice_item.item.id
+    assert_equal nil, invoice_item.item
   end
 
 end

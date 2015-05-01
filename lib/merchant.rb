@@ -14,6 +14,6 @@ class Merchant < ModelObject
   end
 
   def invoices
-    repository.engine.invoice_repository.find_all_by_customer_id(id)
+    repository.engine.invoice_repository.find_all_by_merchant_id(id)
   end
 end

@@ -41,6 +41,6 @@ class MerchantTest < Minitest::Test
     engine.startup
     merchant = engine.merchant_repository.collection.first
 
-    assert_equal 8, merchant.invoices.count
+    assert_equal 0, merchant.invoices.count
   end
 end

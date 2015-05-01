@@ -13,11 +13,11 @@ class InvoiceItem < ModelObject
   end
 
   def invoice
-    repository.find_by_invoice_id(invoice_id)
+    repository.engine.invoice_repository.find_by_id(invoice_id)
   end
 
   def item
-    repository.find_by_item_id(item_id)
+    repository.engine.item_repository.find_by_id(item_id)
   end
 
 end

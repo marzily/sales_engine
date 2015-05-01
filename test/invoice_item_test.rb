@@ -37,4 +37,20 @@ class InvoiceItemTest < Minitest::Test
     assert_equal 13635, @invoice_item.unit_price
   end
 
+  def test_invoice_returns_an_instance_of_invoice_item
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    invoice_item = engine.invoice_item_repository.collection.first
+    
+    assert_equal 1, invoice_item.invoice.id
+  end  
+
+  def test_item_returns_an_instance_of_invoice_item
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    invoice_item = engine.invoice_item_repository.collection.first
+
+    assert_equal nil, invoice_item.item
+  end
+
 end

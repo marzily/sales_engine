@@ -1,9 +1,7 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/invoice'
+require './test/test_helper'
 
 class InvoiceTest < Minitest::Test
-  attr_reader :invoice
+  attr_reader :invoice, :invoice1
 
   def setup
     data = {  id:          "3",
@@ -12,6 +10,10 @@ class InvoiceTest < Minitest::Test
               status:      "shipped"
             }
     @invoice = Invoice.new(data, nil)
+
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    @invoice1 = engine.invoice_repository.collection[1]
   end
 
   def test_invoice_has_id
@@ -29,5 +31,26 @@ class InvoiceTest < Minitest::Test
   def test_invoice_has_status
     assert_equal "shipped", invoice.status
   end
-  
+
+  def test_it_returns_all_transactions_for_invoice
+    assert_equal 1, invoice1.transactions.count
+  end
+
+  def test_it_returns_all_invoice_items_for_invoice
+    assert_equal 2, invoice1.invoice_items.count
+  end
+
+  def test_it_finds_all_items_by_way_of_invoice_items
+    assert_equal 2, invoice1.items.count
+  end
+
+  def test_it_finds_customer_associated_with_this_invoice
+    assert_equal 1, invoice1.customer.id
+    assert_equal "Joey", invoice1.customer.first_name
+  end
+
+  def test_it_finds_merchant_associated_with_this_invoice
+    assert_nil invoice1.merchant
+  end
+
 end

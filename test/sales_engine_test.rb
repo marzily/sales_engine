@@ -77,7 +77,7 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_transaction_repository_loads_the_correct_csv_file
-    assert_equal 4354495077693036, @engine.transaction_repository.find_by_id(3).credit_card_number
+    assert_equal "4354495077693036", @engine.transaction_repository.find_by_id(3).credit_card_number
   end
 
 end

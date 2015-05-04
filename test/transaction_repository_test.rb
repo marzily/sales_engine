@@ -18,11 +18,11 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_first_transaction_by_credit_card_number
-    assert_equal 2, repo.find_by_credit_card_number(4580251236515201).id
+    assert_equal 2, repo.find_by_credit_card_number("4580251236515201").id
   end
 
   def test_it_finds_all_transactions_by_credit_card_number
-    assert_equal 1, repo.find_all_by_credit_card_number(4580251236515201).count
+    assert_equal 1, repo.find_all_by_credit_card_number("4580251236515201").count
   end
 
   def test_it_finds_first_transaction_by_cc_expiration_date

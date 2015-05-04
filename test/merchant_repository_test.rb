@@ -1,13 +1,10 @@
-require './test/test_helper'
-
+require_relative 'test_helper'
 
 class MerchantRepositoryTest < Minitest::Test
-  include Parser
-
   attr_reader :repo
 
   def setup
-    data  = parse("./test/fixtures/merchants.csv")
+    data  = Parser.new("./test/fixtures/merchants.csv").values
     @repo = MerchantRepository.new(data, nil)
   end
 
@@ -21,7 +18,3 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal 1, repo.find_all_by_name("Schroeder-Jerde").count
   end
 end
-
-
-
-

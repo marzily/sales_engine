@@ -1,8 +1,8 @@
-require './test/test_helper'
+require_relative 'test_helper'
 
 class TransactionTest < Minitest::Test
   attr_reader :transaction
-  
+
   def setup
     data = {  id:                 "1",
               invoice_id:         "1",

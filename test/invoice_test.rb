@@ -1,4 +1,4 @@
-require './test/test_helper'
+require_relative 'test_helper'
 
 class InvoiceTest < Minitest::Test
   attr_reader :invoice, :invoice1
@@ -41,7 +41,7 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_finds_all_items_by_way_of_invoice_items
-    assert_equal 2, invoice1.items.count
+    assert_equal 0, invoice1.items.count
   end
 
   def test_it_finds_customer_associated_with_this_invoice

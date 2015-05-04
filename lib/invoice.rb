@@ -20,9 +20,7 @@ class Invoice < ModelObject
   end
 
   def items
-    invoice_items.map do |invoice_item|
-      invoice_item.repository.engine.item_repository.find_all_by_id(invoice_item.item_id)
-    end
+    invoice_items.map { |invoice_item| invoice_item.item }.compact
   end
 
   def customer

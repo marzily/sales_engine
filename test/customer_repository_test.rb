@@ -1,13 +1,10 @@
-require './test/test_helper'
-require 'csv'
+require_relative 'test_helper'
 
 class CustomerRepositoryTest < Minitest::Test
-  include Parser
-
   attr_reader :repo
 
   def setup
-    customer_data = parse("./test/fixtures/customers.csv")
+    customer_data = Parser.new("./test/fixtures/customers.csv").values
     @repo = CustomerRepository.new(customer_data, nil)
   end
 

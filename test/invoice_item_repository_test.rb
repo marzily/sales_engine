@@ -1,13 +1,10 @@
-require './test/test_helper'
-require 'csv'
+require_relative 'test_helper'
 
 class InvoiceItemRepositoryTest < Minitest::Test
-  include Parser
-
   attr_reader :repo
 
   def setup
-    customer_data = parse("./test/fixtures/invoice_items.csv")
+    customer_data = Parser.new("./test/fixtures/invoice_items.csv").values
     @repo = InvoiceItemRepository.new(customer_data, nil)
   end
 
@@ -42,5 +39,4 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_it_finds_first_invoice_item_by_unit_price
     assert_equal 6, @repo.find_by_unit_price(52100).id
   end
-
 end

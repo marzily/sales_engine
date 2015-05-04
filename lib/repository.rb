@@ -10,9 +10,7 @@ class Repository
   end
 
   def generate(data)
-    data.map do |object_data|
-      model_class.new(object_data, self)
-    end
+    data.map { |object_data| model_class.new(object_data, self) }
   end
 
   def all
@@ -45,6 +43,10 @@ class Repository
 
   def find_all_by_updated_at(time_stamp)
     collection.select {|object| object.updated_at == time_stamp}
+  end
+
+  def inspect
+    "#<#{self.class} #{collection.size} rows>"
   end
 
 end

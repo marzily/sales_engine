@@ -1,4 +1,4 @@
-require './test/test_helper'
+require_relative 'test_helper'
 
 class InvoiceItemTest < Minitest::Test
 
@@ -41,9 +41,9 @@ class InvoiceItemTest < Minitest::Test
     engine = SalesEngine.new('./test/fixtures/')
     engine.startup
     invoice_item = engine.invoice_item_repository.collection.first
-    
+
     assert_equal 1, invoice_item.invoice.id
-  end  
+  end
 
   def test_item_returns_an_instance_of_invoice_item
     engine = SalesEngine.new('./test/fixtures/')

@@ -1,13 +1,10 @@
-require './test/test_helper'
-require 'csv'
+require_relative 'test_helper'
 
 class TransactionRepositoryTest < Minitest::Test
-  include Parser
-
   attr_reader :repo
 
   def setup
-    transaction_data = parse("./test/fixtures/transactions.csv")
+    transaction_data = Parser.new("./test/fixtures/transactions.csv").values
     @repo = TransactionRepository.new(transaction_data, nil)
   end
 
@@ -44,5 +41,4 @@ class TransactionRepositoryTest < Minitest::Test
   def test_it_finds_all_transactions_by_result
     assert_equal 10, repo.find_all_by_result("success").count
   end
-
 end

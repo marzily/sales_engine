@@ -18,5 +18,5 @@ class Transaction < ModelObject
   def invoice
     repository.engine.invoice_repository.find_by_id(invoice_id)
   end
-  
+
 end

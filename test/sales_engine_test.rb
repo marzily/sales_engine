@@ -1,16 +1,11 @@
-require './test/test_helper'
+require_relative 'test_helper'
 
 class SalesEngineTest < Minitest::Test
   attr_reader :engine
 
   def setup
-    @engine = SalesEngine.new('./test/fixtures/')
+    @engine = SalesEngine.new('./test/fixtures')
     engine.startup
-  end
-
-  def test_it_loads_hash_data_if_data_is_nil
-    assert_instance_of CSV, engine.data[:customers]
-    assert_equal 6, engine.data.count
   end
 
   def test_creates_customer_repository

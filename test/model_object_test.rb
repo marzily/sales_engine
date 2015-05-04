@@ -1,4 +1,4 @@
-require './test/test_helper'
+require_relative 'test_helper'
 
 class ModelObjectTest < Minitest::Test
   attr_reader :model_object

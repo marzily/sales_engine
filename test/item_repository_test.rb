@@ -1,13 +1,10 @@
-require './test/test_helper'
-require 'csv'
+require_relative 'test_helper'
 
 class ItemRepositoryTest < Minitest::Test
-  include Parser
-
   attr_reader :repo
 
   def setup
-    item_data = parse("./test/fixtures/items.csv")
+    item_data = Parser.new("./test/fixtures/items.csv").values
     @repo = ItemRepository.new(item_data, nil)
   end
 
@@ -31,6 +28,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_it_finds_first_item_by_unit_price
     assert_equal 8, repo.find_by_unit_price(34355).id
+
   end
 
   def test_it_finds_all_items_by_unit_price
@@ -44,5 +42,4 @@ class ItemRepositoryTest < Minitest::Test
   def test_it_finds_all_items_by_merchant_id
     assert_equal 10, repo.find_all_by_merchant_id(1).count
   end
-
 end

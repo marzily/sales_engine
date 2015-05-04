@@ -1,4 +1,4 @@
-require './test/test_helper'
+require_relative 'test_helper'
 
 class MerchantTest < Minitest::Test
   attr_reader :merchant
@@ -34,7 +34,7 @@ class MerchantTest < Minitest::Test
     merchant = engine.merchant_repository.collection.first
 
     assert_equal 10, merchant.items.count
-  end  
+  end
 
   def test_items_returns_all_invoices_for_merchant
     engine = SalesEngine.new('./test/fixtures/')

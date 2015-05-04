@@ -7,8 +7,6 @@ require_relative 'merchant_repository'
 require_relative 'transaction_repository'
 
 class SalesEngine
-  include Parser
-
   attr_reader :file_directory,
               :customer_repository,
               :invoice_repository,
@@ -21,16 +19,6 @@ class SalesEngine
     @file_directory = file_directory
   end
 
-  def data
-    @data ||= { customers:     parse("#{file_directory}customers.csv"),
-                invoices:      parse("#{file_directory}invoices.csv"),
-                invoice_items: parse("#{file_directory}invoice_items.csv"),
-                items:         parse("#{file_directory}items.csv"),
-                merchants:     parse("#{file_directory}merchants.csv"),
-                transactions:  parse("#{file_directory}transactions.csv"),
-               }
-  end
-
   def startup
     @customer_repository     = CustomerRepository.new(data[:customers], self)
     @invoice_repository      = InvoiceRepository.new(data[:invoices], self)
@@ -39,4 +27,17 @@ class SalesEngine
     @merchant_repository     = MerchantRepository.new(data[:merchants], self)
     @transaction_repository  = TransactionRepository.new(data[:transactions], self)
   end
+
+  private
+
+  def data
+    @data ||= { customers:     Parser.new("#{file_directory}/customers.csv").values,
+                invoices:      Parser.new("#{file_directory}/invoices.csv").values,
+                invoice_items: Parser.new("#{file_directory}/invoice_items.csv").values,
+                items:         Parser.new("#{file_directory}/items.csv").values,
+                merchants:     Parser.new("#{file_directory}/merchants.csv").values,
+                transactions:  Parser.new("#{file_directory}/transactions.csv").values,
+               }
+  end
+
 end

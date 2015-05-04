@@ -1,4 +1,5 @@
 require_relative 'model_object'
+require 'bigdecimal'
 
 class Item < ModelObject
 
@@ -11,7 +12,7 @@ class Item < ModelObject
     super
     @name        = data[:name]
     @description = data[:description]
-    @unit_price  = data[:unit_price].to_i
+    @unit_price  = BigDecimal.new(data[:unit_price].to_i) / 100
     @merchant_id = data[:merchant_id].to_i
   end
 
@@ -22,5 +23,5 @@ class Item < ModelObject
   def merchant
     repository.engine.merchant_repository.find_by_id(merchant_id)
   end
-  
+
 end

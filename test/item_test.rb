@@ -1,4 +1,5 @@
 require_relative 'test_helper'
+require 'bigdecimal'
 
 class ItemTest < Minitest::Test
   attr_reader :item
@@ -36,7 +37,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_item_has_unit_price
-    assert_equal 75107, item.unit_price
+    assert_equal BigDecimal.new(75107) / 100, item.unit_price
   end
 
   def test_item_has_merchant_id

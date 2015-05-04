@@ -1,4 +1,5 @@
 require_relative 'test_helper'
+require 'bigdecimal'
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :repo
@@ -27,12 +28,11 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_first_item_by_unit_price
-    assert_equal 8, repo.find_by_unit_price(34355).id
-
+    assert_equal 8, repo.find_by_unit_price(BigDecimal.new(34355) / 100).id
   end
 
   def test_it_finds_all_items_by_unit_price
-    assert_equal 1, repo.find_all_by_unit_price(34355).count
+    assert_equal 1, repo.find_all_by_unit_price(BigDecimal.new(34355) / 100).count
   end
 
   def test_it_finds_first_item_by_merchant_id

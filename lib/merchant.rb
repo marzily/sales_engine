@@ -19,13 +19,7 @@ class Merchant < ModelObject
 
   def revenue(date = nil)
 
-    unless date.nil?
-      invoice_ids = invoices.map do |invoice|
-        invoice.id if invoice.created_at == date
-      end
-    else
-      invoice_ids = invoices.map { |invoice| invoice.id }.uniq
-    end
+    invoice_ids = invoice_ids(date)
 
     transactions = invoice_ids.flat_map do |invoice_id|
       repository.engine.transaction_repository.find_all_by_invoice_id(invoice_id)
@@ -48,4 +42,15 @@ class Merchant < ModelObject
     end.inject(:+)
 
   end
+
+  def invoice_ids(date)
+    unless date.nil?
+      invoices.map do |invoice|
+        invoice.id if invoice.created_at == date
+      end
+    else
+      invoice_ids = invoices.map { |invoice| invoice.id }.uniq
+    end
+  end
+
 end

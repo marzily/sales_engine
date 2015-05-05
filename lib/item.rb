@@ -24,4 +24,9 @@ class Item < ModelObject
     repository.engine.merchant_repository.find_by_id(merchant_id)
   end
 
+  # def best_day
+  #   invoice_items.map { |invoice_item| invoice_item.invoice }
+  #     .max_by { |invoice| invoice.created_at }
+  # end
+
 end

@@ -14,4 +14,8 @@ class Customer < ModelObject
     repository.engine.invoice_repository.find_all_by_customer_id(id)
   end
 
+  def transactions
+    invoices.flat_map { |invoice| invoice.transactions }
+  end
+
 end

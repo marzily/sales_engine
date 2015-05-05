@@ -1,7 +1,7 @@
 require_relative 'test_helper'
 
 class CustomerTest < Minitest::Test
-  attr_reader :customer
+  attr_reader :customer, :customer_from_repo
 
   def setup
     data = {  id: "1",
@@ -11,13 +11,10 @@ class CustomerTest < Minitest::Test
               updated_at: "2012-03-27 14:54:09 UTC"
             }
     @customer = Customer.new(data, nil)
-  end
 
-  def test_it_initializes_with_instance_object_attributes
-    assert_equal 1, customer.id
-    assert_equal "2012-03-27 14:54:09 UTC", customer.created_at
-    assert_equal "2012-03-27 14:54:09 UTC", customer.updated_at
-    assert_nil customer.repository
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    @customer_from_repo = engine.customer_repository.collection.first
   end
 
   def test_customer_has_a_first_name
@@ -29,11 +26,12 @@ class CustomerTest < Minitest::Test
   end
 
   def test_it_returns_all_invoices_for_customer
-    engine = SalesEngine.new('./test/fixtures/')
-    engine.startup
-    customer1 = engine.customer_repository.collection.first
+    assert_equal 8, customer_from_repo.invoices.count
+  end
 
-    assert_equal 8, customer1.invoices.count
+  def test_it_returns_all_transactions_for_one_customer
+    assert customer_from_repo.transactions.all? { |transaction| transaction.is_a?(Transaction)}
+    assert_equal 7, customer_from_repo.transactions.count
   end
 
 end

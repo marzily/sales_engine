@@ -7,7 +7,9 @@ class InvoiceTest < Minitest::Test
     data = {  id:          "3",
               customer_id: "1",
               merchant_id: "78",
-              status:      "shipped"
+              status:      "shipped",
+              created_at: "2012-03-27 14:54:09 UTC",
+              updated_at: "2012-03-27 14:54:09 UTC"
             }
     @invoice = Invoice.new(data, nil)
 

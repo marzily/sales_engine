@@ -32,4 +32,5 @@ class InvoiceRepository < Repository
   def find_all_by_status(status)
     collection.select { |invoice| invoice.status == status }
   end
+
 end

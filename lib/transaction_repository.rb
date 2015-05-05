@@ -18,9 +18,7 @@ class TransactionRepository < Repository
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    collection.select { |object|
-    # raise object.credit_card_number
-      object.credit_card_number.to_s == credit_card_number }
+    collection.select { |object| object.credit_card_number == credit_card_number }
   end
 
   def find_by_credit_card_number(credit_card_number)

@@ -1,3 +1,4 @@
+require 'date'
 require_relative 'model_object'
 
 class Repository
@@ -34,7 +35,9 @@ class Repository
   end
 
   def find_all_by_created_at(time_stamp)
-    collection.select {|object| object.created_at == time_stamp}
+    collection.select {|object|
+      raise object.created_at.inspect
+      object.created_at == time_stamp}
   end
 
   def find_by_updated_at(time_stamp)

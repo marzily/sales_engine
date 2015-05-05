@@ -16,4 +16,5 @@ class MerchantRepository < Repository
   def find_all_by_name(name)
     collection.select {|merchant| merchant.name.downcase == name.downcase}
   end
+
 end

@@ -35,14 +35,6 @@ class TransactionTest < Minitest::Test
     assert_equal "success", transaction.result
   end
 
-  def test_transaction_has_created_at_date_in_yyyymmdd_hhmmss_format
-    assert_equal "2012-03-27 14:54:09 UTC", transaction.created_at
-  end
-
-  def test_transaction_has_updated_date_in_yyymmdd__hhmmss_format
-    assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
-  end
-
   def test_invoice_returns_a_invoice_for_transaction
     engine = SalesEngine.new('./test/fixtures/')
     engine.startup

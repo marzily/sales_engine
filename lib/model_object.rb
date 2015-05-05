@@ -10,5 +10,4 @@ class ModelObject
     @updated_at = Date.parse(data[:updated_at])
     @repository = repository
   end
-
 end

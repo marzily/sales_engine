@@ -8,6 +8,7 @@ class Repository
 
 end
 
+
 class RepositoryTest < Minitest::Test
   attr_reader :repo
 

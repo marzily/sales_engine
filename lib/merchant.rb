@@ -18,39 +18,32 @@ class Merchant < ModelObject
   end
 
   def revenue(date = nil)
-
-    invoice_ids = invoice_ids(date)
-
-    transactions = invoice_ids.flat_map do |invoice_id|
-      repository.engine.transaction_repository.find_all_by_invoice_id(invoice_id)
+    successful_invoice_items(date).inject(0) do |sum, invoice_item|
+      sum + (invoice_item.quantity * invoice_item.unit_price)
     end
-
-    successful_transactions = transactions.select do |transaction|
-      transaction.result == "success"
-    end
-
-    successful_invoice_ids = successful_transactions.map do |transaction|
-      transaction.invoice_id
-    end
-
-    invoice_items = successful_invoice_ids.flat_map do |invoice_id|
-      repository.engine.invoice_item_repository.find_all_by_invoice_id(invoice_id)
-    end
-
-    invoice_items.map do |invoice_item|
-      invoice_item.quantity * invoice_item.unit_price
-    end.inject(:+)
-
   end
 
-  def invoice_ids(date)
-    unless date.nil?
-      invoices.map do |invoice|
-        invoice.id if invoice.created_at == date
-      end
+  private
+
+  def transactions(date)
+    if date.nil?
+      transactions = invoices.flat_map { |invoice| invoice.transactions }
     else
-      invoice_ids = invoices.map { |invoice| invoice.id }.uniq
+      invoices_by_date = invoices.select { |invoice| invoice.created_at == date }
+      transactions = invoices_by_date.flat_map { |invoice| invoice.transactions }
     end
+  end
+
+  def successful_transactions(date)
+    transactions(date).select { |transaction| transaction.result == "success" }
+  end
+
+  def successful_invoices(date)
+    successful_transactions(date).map { |transaction| transaction.invoice }
+  end
+
+  def successful_invoice_items(date)
+    successful_invoices(date).flat_map { |invoice| invoice.invoice_items }
   end
 
 end

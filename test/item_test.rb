@@ -1,8 +1,7 @@
 require_relative 'test_helper'
-require 'bigdecimal'
 
 class ItemTest < Minitest::Test
-  attr_reader :item
+  attr_reader :item, :item_from_repo
 
   def setup
     data = {  id:          "1",
@@ -14,6 +13,10 @@ class ItemTest < Minitest::Test
               merchant_id: "3"
             }
     @item = Item.new(data, nil)
+
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    @item_from_repo = engine.item_repository.collection.first
   end
 
   def test_item_has_a_default_id
@@ -22,14 +25,6 @@ class ItemTest < Minitest::Test
 
   def test_item_has_a_name
     assert_equal "Test Item", item.name
-  end
-
-  def test_item_has_created_at_date_in_yyyymmdd_hhmmss_format
-    assert_equal "2012-03-27 14:54:00 UTC", item.created_at
-  end
-
-  def test_item_has_updated_date_in_yyymmdd__hhmmss_format
-    assert_equal "2012-03-27 14:54:00 UTC", item.updated_at
   end
 
   def test_item_has_description
@@ -45,18 +40,15 @@ class ItemTest < Minitest::Test
   end
 
   def test_invoice_items_returns_all_invoice_items_for_item
-    engine = SalesEngine.new('./test/fixtures/')
-    engine.startup
-    item = engine.item_repository.collection.first
-
-    assert_equal 0, item.invoice_items.count
+    assert_equal 0, item_from_repo.invoice_items.count
   end
 
   def test_merchant_returns_a_merchant_for_item
-    engine = SalesEngine.new('./test/fixtures/')
-    engine.startup
-    item = engine.item_repository.collection.first
+    assert_equal 1, item_from_repo.merchant.id
+  end
 
-    assert_equal 1, item.merchant.id
+  def test_it_finds_the_best_day_for_sales
+    skip
+    assert_nil item_from_repo.best_day
   end
 end

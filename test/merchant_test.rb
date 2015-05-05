@@ -20,14 +20,6 @@ class MerchantTest < Minitest::Test
     assert_equal "Cummings-Thiel", merchant.name
   end
 
-  def test_merchant_has_created_at_date_in_yyyymmdd_hhmmss_format
-    assert_equal "2012-03-27 14:54:00 UTC", merchant.created_at
-  end
-
-  def test_merchant_has_updated_date_in_yyymmdd__hhmmss_format
-    assert_equal "2012-03-27 14:54:00 UTC", merchant.updated_at
-  end
-
   def test_items_returns_all_items_for_merchant
     engine = SalesEngine.new('./test/fixtures/')
     engine.startup

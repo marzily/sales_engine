@@ -1,3 +1,4 @@
+require 'bigdecimal'
 require_relative 'repository'
 require_relative 'invoice_item'
 
@@ -34,7 +35,8 @@ class InvoiceItemRepository < Repository
   end
 
   def find_all_by_unit_price(unit_price)
-    collection.select { |invoice_item| invoice_item.unit_price == unit_price }
+    price = BigDecimal.new(unit_price) / 100
+    collection.select { |invoice_item| invoice_item.unit_price == price }
   end
 
   def find_by_unit_price(unit_price)

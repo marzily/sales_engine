@@ -1,3 +1,4 @@
+require 'date'
 require_relative 'test_helper'
 
 class ModelObjectTest < Minitest::Test
@@ -16,10 +17,10 @@ class ModelObjectTest < Minitest::Test
   end
 
   def test_it_has_created_at_time_stamp
-    assert_equal "2012-05-27 14:54:09 UTC", model_object.created_at
+    assert_equal Date.parse("2012-05-27 14:54:09 UTC"), model_object.created_at
   end
 
   def test_it_has_updated_at_time_stamp
-    assert_equal "2012-06-27 14:54:09 UTC", model_object.updated_at
+    assert_equal Date.parse("2012-06-27 14:54:09 UTC"), model_object.updated_at
   end
 end

@@ -43,4 +43,12 @@ class MerchantTest < Minitest::Test
 
     assert_equal 0, merchant.invoices.count
   end
+
+  def test_revenue_returns_total_revenue_for_merchant_for_all_transactions
+    engine = SalesEngine.new('./test/fixtures/')
+    engine.startup
+    merchant = engine.merchant_repository.collection.first
+
+    # assert_equal  __ , merchant.revenue
+  end
 end

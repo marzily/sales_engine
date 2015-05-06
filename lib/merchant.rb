@@ -55,8 +55,6 @@ class Merchant < ModelObject
     invoice_items.inject(0) { |sum, invoice_item| sum + invoice_item.quantity }
   end
 
-  private
-
   def transactions_by_date(date)
     if date.nil?
       invoices.flat_map { |invoice| invoice.transactions }

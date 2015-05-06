@@ -24,9 +24,21 @@ class Item < ModelObject
     repository.engine.merchant_repository.find_by_id(merchant_id)
   end
 
-  # def best_day
-  #   invoice_items.map { |invoice_item| invoice_item.invoice }
-  #     .max_by { |invoice| invoice.created_at }
-  # end
+  def best_day
+    trans = merchant.transactions_by_date(nil)
+    successful_trans = merchant.successful_transactions(trans)
+    successful_inv = merchant.successful_invoices(successful_trans)
+    successful_inv_items = merchant.successful_invoice_items(successful_inv)
+
+    quantity_by_date = Hash.new { |hash, key| hash[key] = 0 }
+    successful_inv_items.each do |inv_item|
+      quantity_by_date[inv_item] += inv_item.quantity
+    end
+
+    quantity_by_date.max_by { |date, quantity| quantity }.first.created_at
+
+    # dates = invoice_items.map { |invoice_item| invoice_item.invoice.created_at }
+    # dates.
+  end
 
 end

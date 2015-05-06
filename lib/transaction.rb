@@ -19,4 +19,8 @@ class Transaction < ModelObject
     repository.engine.invoice_repository.find_by_id(invoice_id)
   end
 
+  def merchant
+    invoice.merchant
+  end
+
 end

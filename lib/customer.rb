@@ -18,4 +18,13 @@ class Customer < ModelObject
     invoices.flat_map { |invoice| invoice.transactions }
   end
 
+  def favorite_merchant
+    successful_transactions = transactions.select do |transaction|
+      transaction.result == 'success'
+    end
+
+    merchants = successful_transactions.map { |transaction| transaction.merchant }
+    merchants.max_by { |merchant| merchants.count(merchant) }
+  end
+
 end

@@ -41,8 +41,18 @@ class Merchant < ModelObject
   def customers_with_pending_invoices
     transactions = transactions_by_date(nil)
 
-    pending_invoices = invoices - successful_invoices(successful_transactions(transactions))
+    pending_invoices =
+      invoices - successful_invoices(successful_transactions(transactions))
+
     pending_invoices.map { |invoice| invoice.customer }
+  end
+
+  def items_sold
+    trans = successful_transactions(transactions_by_date(nil))
+    inv = successful_invoices(trans)
+    invoice_items = successful_invoice_items(inv)
+
+    invoice_items.inject(0) { |sum, invoice_item| sum + invoice_item.quantity }
   end
 
   private

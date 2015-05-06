@@ -14,7 +14,28 @@ class MerchantRepository < Repository
   end
 
   def find_all_by_name(name)
-    collection.select {|merchant| merchant.name.downcase == name.downcase}
+    collection.select { |merchant| merchant.name.downcase == name.downcase }
   end
+
+  def most_revenue(n)
+    merchant_revenue = {}
+    collection.each do |merchant|
+      merchant_revenue[merchant] = merchant.revenue
+    end
+
+    merchant_revenue.max_by(n) { |merchant, revenue| revenue }.map(&:first)
+    # sorted_merchants = collection.sort_by { |merchant| merchant.revenue }.reverse
+    # sorted_merchants.first(n)
+  end
+
+  def most_items(n)
+    merchant_items = {}
+    collection.each do |merchant|
+      merchant_items[merchant] = merchant.items_sold
+    end
+
+    merchant_items.max_by(n) { |merchant, items_sold| items_sold }.map(&:first)
+  end
+
 
 end

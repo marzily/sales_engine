@@ -18,10 +18,10 @@ class MerchantRepository < Repository
   end
 
   # def most_revenue(n)
-  #   merchant_revenue = {}
-  #   collection.each do |merchant|
-  #     merchant_revenue[merchant] = merchant.revenue
-  #   end
+    # merchant_revenue = {}
+    # collection.each do |merchant|
+      # merchant_revenue[merchant] = merchant.revenue
+    # end
 
     # merchant_revenue.max_by(n) { |merchant, revenue| revenue }.map(&:first)
 
@@ -30,7 +30,7 @@ class MerchantRepository < Repository
     # sorted_merchants.first(n)
 
   # end
-  #
+
   # def most_items(n)
   #   merchant_items = {}
   #   collection.each do |merchant|

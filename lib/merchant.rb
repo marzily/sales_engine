@@ -24,37 +24,32 @@ class Merchant < ModelObject
   end
 
   def favorite_customer
-    customers = successful_invoices(nil).map { |invoice| invoice.customer }
+    customers = successful_invoices(nil).map(&:customer)
     customers.max_by {|customer| customers.count(customer) }
   end
 
   def customers_with_pending_invoices
-    (invoices - successful_invoices(nil)).map { |invoice| invoice.customer }
+    invoices.reject(&:success?).map(&:customer)
   end
 
   def items_sold
-    successful_invoice_items(nil).inject(0) { |sum, invoice_item| sum + invoice_item.quantity }
-  end
-
-  def transactions(date)
-    if date.nil?
-      invoices.flat_map { |invoice| invoice.transactions }
-    else
-      invoices_by_date = invoices.select { |invoice| invoice.created_at == date }
-      invoices_by_date.flat_map { |invoice| invoice.transactions }
+    successful_invoice_items(nil).inject(0) do |sum, invoice_item|
+      sum + invoice_item.quantity
     end
   end
 
-  def successful_transactions(date)
-    transactions(date).select { |transaction| transaction.result == "success" }
-  end
-
   def successful_invoices(date)
-    successful_transactions(date).map { |transaction| transaction.invoice }
+    if date.nil?
+      invoices.select { |invoice| invoice.success? }
+    else
+      invoices_by_date = invoices.select do |invoice|
+        invoice.success? && invoice.created_at == date
+      end
+    end
   end
 
   def successful_invoice_items(date)
-    successful_invoices(date).flat_map { |invoice| invoice.invoice_items }
+    successful_invoices(date).flat_map(&:invoice_items)
   end
 
 end

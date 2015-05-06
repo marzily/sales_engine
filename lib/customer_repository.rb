@@ -2,6 +2,7 @@ require_relative 'repository'
 require_relative 'customer'
 
 class CustomerRepository < Repository
+  
   attr_reader :model_class
 
   def initialize(data, engine)
@@ -24,5 +25,4 @@ class CustomerRepository < Repository
   def find_all_by_last_name(last_name)
     collection.select { |object| object.last_name.downcase == last_name.downcase }
   end
-
 end

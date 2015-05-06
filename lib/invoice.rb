@@ -31,4 +31,12 @@ class Invoice < ModelObject
     repository.engine.merchant_repository.find_by_id(merchant_id)
   end
 
+  def successful_transactions
+    transactions.select { |transaction| transaction.result == 'success' }
+  end
+
+  def success?
+    transactions.any? { |transaction| transaction.result == 'success' }
+  end
+
 end

@@ -20,4 +20,8 @@ class InvoiceItem < ModelObject
     repository.engine.item_repository.find_by_id(item_id)
   end
 
+  def success?
+    invoice.success?
+  end
+
 end

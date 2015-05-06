@@ -34,4 +34,8 @@ class CustomerTest < Minitest::Test
     assert_equal 7, customer_from_repo.transactions.count
   end
 
+  def test_it_returns_favorite_merchant
+    assert_nil customer_from_repo.favorite_merchant
+  end
+
 end

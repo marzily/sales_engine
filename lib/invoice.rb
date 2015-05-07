@@ -1,4 +1,5 @@
 require_relative 'model_object'
+require_relative 'transaction'
 
 class Invoice < ModelObject
 

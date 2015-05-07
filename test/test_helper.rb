@@ -2,7 +2,7 @@ require "minitest/autorun"
 require 'minitest/pride'
 
 require './lib/sales_engine'
-# require './lib/parser'
+require './lib/parser'
 require './lib/model_object'
 require './lib/repository'
 require './lib/customer'

@@ -55,4 +55,13 @@ class InvoiceTest < Minitest::Test
     assert_nil invoice1.merchant
   end
 
+  def test_charge_creates_a_new_transaction
+    data = { credit_card_number: "4444333322221111",
+      credit_card_expiration: "10/13", result: "success" }
+      transaction = invoice1.charge(data)
+
+    assert_instance_of Transaction, transaction
+    assert_equal 11, transaction.id
+  end
+
 end

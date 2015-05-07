@@ -27,7 +27,7 @@ class Repository
   end
 
   def find_all_by_id(id)
-    collection.select {|object| object.id == id}
+    collection.select { |object| object.id == id }
   end
 
   def find_by_created_at(time_stamp)
@@ -35,9 +35,8 @@ class Repository
   end
 
   def find_all_by_created_at(time_stamp)
-    collection.select {|object|
-      raise object.created_at.inspect
-      object.created_at == time_stamp}
+    date = Date.parse(time_stamp) unless time_stamp.is_a?(Date)
+    collection.select { |object| object.created_at == date }
   end
 
   def find_by_updated_at(time_stamp)
@@ -45,7 +44,8 @@ class Repository
   end
 
   def find_all_by_updated_at(time_stamp)
-    collection.select {|object| object.updated_at == time_stamp}
+    date = Date.parse(time_stamp) unless time_stamp.is_a?(Date)
+    collection.select { |object| object.updated_at == date }
   end
 
   def inspect

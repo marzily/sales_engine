@@ -48,7 +48,6 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_finds_the_best_day_for_sales
-    skip
     assert_nil item_from_repo.best_day
   end
 end

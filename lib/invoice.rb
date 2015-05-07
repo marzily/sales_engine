@@ -41,12 +41,14 @@ class Invoice < ModelObject
   end
 
   def charge(card_info = {})
-    card_info[:id] = repository.engine.transaction_repository.all.last.id + 1
+    transaction_repo = repository.engine.transaction_repository
+
+    card_info[:id] = transaction_repo.all.last.id + 1
     card_info[:invoice_id] = self.id
     card_info[:created_at] = Time.now.to_s
     card_info[:updated_at] = Time.now.to_s
-    transaction_repo = repository.engine.transaction_repository.collection
-    transaction_repo << Transaction.new(card_info, repository.engine.transaction_repository)
+
+    Transaction.new(card_info, transaction_repo)
   end
 
 end

@@ -33,4 +33,5 @@ class MerchantRepositoryTest < Minitest::Test
   def test_it_returns_total_revenue_for_a_date
     assert_equal 0, repo_from_engine.revenue(Date.parse('2012-03-27 14:53:59 UTC'))
   end
+  
 end

@@ -32,8 +32,13 @@ class MerchantTest < Minitest::Test
     assert_equal 0, merchant_from_repo.invoices.count
   end
 
-  def test_revenue_returns_total_revenue_for_merchant_for_all_transactions
+  def test_it_returns_total_revenue_for_merchant
     assert_equal 0, merchant_from_repo.revenue
+  end
+
+  def test_it_returns_total_revenue_for_merchant_on_a_date
+    date = Date.parse('2012-03-25 09:54:09 UTC')
+    assert_equal 0, merchant_from_repo.revenue(date)
   end
 
   def test_it_finds_a_merchants_favorite_customer

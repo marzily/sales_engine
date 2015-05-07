@@ -43,15 +43,17 @@ class InvoiceItemRepository < Repository
     find_all_by_unit_price(unit_price).first
   end
 
-  def create_invoice_item(invoice_info, id)
-    grouped = invoice_info.inject(Hash.new(0)) { |hash, x| hash[x] += 1 ; hash }
-    items   = invoice_info.uniq
-    items.each do |item|
+  def create_invoice_item(invoice_info, invoice_id)
+    grouped = invoice_info.inject(Hash.new(0)) do |hash, x|
+      hash[x] += 1 ; hash
+    end
 
+    items = invoice_info.uniq
+    items.each do |item|
       data = {
-        :id         => collection.last.id,
+        :id         => collection.last.id + 1,
         :item_id    => item.id,
-        :invoice_id => id,
+        :invoice_id => invoice_id,
         :quantity   => grouped[item],
         :unit_price => item.unit_price,
         :created_at => Time.now.to_s,

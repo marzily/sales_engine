@@ -43,9 +43,11 @@ class InvoiceRepository < Repository
     invoice_info[:items].each do |item|
       engine.item_repository.collection << item
       end   
-    collection << Invoice.new(invoice_info, self)
+     new_invoice = Invoice.new(invoice_info, self)
+    collection << new_invoice
 
     engine.invoice_item_repository.create_invoice_item(invoice_info[:items], invoice_info[:id] )   
+    new_invoice
   end
 
   # invoice = invoice_repository.create(customer: customer, merchant: merchant, status: "shipped",

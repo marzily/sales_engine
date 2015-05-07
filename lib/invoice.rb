@@ -1,4 +1,5 @@
 require_relative 'model_object'
+require_relative 'transaction'
 
 class Invoice < ModelObject
 
@@ -37,6 +38,15 @@ class Invoice < ModelObject
 
   def success?
     transactions.any? { |transaction| transaction.result == 'success' }
+  end
+
+  def charge(card_info = {})
+    card_info[:id] = repository.engine.transaction_repository.all.last.id + 1
+    card_info[:invoice_id] = self.id
+    card_info[:created_at] = Time.now.to_s
+    card_info[:updated_at] = Time.now.to_s
+    transaction_repo = repository.engine.transaction_repository.collection
+    transaction_repo << Transaction.new(card_info, repository.engine.transaction_repository)
   end
 
 end

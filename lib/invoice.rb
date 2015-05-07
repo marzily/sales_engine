@@ -21,7 +21,7 @@ class Invoice < ModelObject
   end
 
   def items
-    invoice_items.map { |invoice_item| invoice_item.item }.compact
+    invoice_items.map(&:item).compact
   end
 
   def customer

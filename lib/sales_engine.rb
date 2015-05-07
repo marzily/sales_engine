@@ -20,24 +20,37 @@ class SalesEngine
   end
 
   def startup
-    @customer_repository     = CustomerRepository.new(data[:customers], self)
-    @invoice_repository      = InvoiceRepository.new(data[:invoices], self)
-    @invoice_item_repository = InvoiceItemRepository.new(data[:invoice_items], self)
-    @item_repository         = ItemRepository.new(data[:items], self)
-    @merchant_repository     = MerchantRepository.new(data[:merchants], self)
-    @transaction_repository  = TransactionRepository.new(data[:transactions], self)
+    @customer_repository =
+          CustomerRepository.new(data[:customers], self)
+
+    @invoice_repository =
+          InvoiceRepository.new(data[:invoices], self)
+
+    @invoice_item_repository =
+          InvoiceItemRepository.new(data[:invoice_items], self)
+
+    @item_repository =
+          ItemRepository.new(data[:items], self)
+
+    @merchant_repository =
+          MerchantRepository.new(data[:merchants], self)
+
+    @transaction_repository =
+          TransactionRepository.new(data[:transactions], self)
   end
 
   private
 
   def data
-    @data ||= { customers:     Parser.new("#{file_directory}/customers.csv").values,
-                invoices:      Parser.new("#{file_directory}/invoices.csv").values,
-                invoice_items: Parser.new("#{file_directory}/invoice_items.csv").values,
-                items:         Parser.new("#{file_directory}/items.csv").values,
-                merchants:     Parser.new("#{file_directory}/merchants.csv").values,
-                transactions:  Parser.new("#{file_directory}/transactions.csv").values,
-               }
+    @data ||=
+    {
+      customers:     Parser.new("#{file_directory}/customers.csv").values,
+      invoices:      Parser.new("#{file_directory}/invoices.csv").values,
+      invoice_items: Parser.new("#{file_directory}/invoice_items.csv").values,
+      items:         Parser.new("#{file_directory}/items.csv").values,
+      merchants:     Parser.new("#{file_directory}/merchants.csv").values,
+      transactions:  Parser.new("#{file_directory}/transactions.csv").values,
+     }
   end
 
 end

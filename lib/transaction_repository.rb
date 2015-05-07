@@ -18,7 +18,9 @@ class TransactionRepository < Repository
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    collection.select { |object| object.credit_card_number == credit_card_number }
+    collection.select do |object|
+      object.credit_card_number == credit_card_number
+    end
   end
 
   def find_by_credit_card_number(credit_card_number)
@@ -26,7 +28,9 @@ class TransactionRepository < Repository
   end
 
   def find_all_by_cc_expiration_date(cc_expiration_date)
-    collection.select { |object| object.cc_expiration_date == cc_expiration_date }
+    collection.select do |object|
+      object.cc_expiration_date == cc_expiration_date
+    end
   end
 
   def find_by_cc_expiration_date(cc_expiration_date)

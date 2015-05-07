@@ -42,14 +42,14 @@ class ItemRepository < Repository
     find_all_by_merchant_id(merchant_id).first
   end
 
-  def most_revenue(n)
-    items_with_revenue = collection.map { |item| [item, item.revenue] }
-    items_with_revenue.max_by(n) { |item, revenue| revenue }.map(&:first)
-  end
-
-  def most_items(n)
-    items_with_revenue = collection.map { |item| [item, item.total_sold] }
-    items_with_revenue.max_by(n) { |item, total_sold| total_sold }.map(&:first)
-  end
+  # def most_revenue(n)
+  #   items_with_revenue = collection.map { |item| [item, item.revenue] }
+  #   items_with_revenue.max_by(n) { |item, revenue| revenue }.map(&:first)
+  # end
+  #
+  # def most_items(n)
+  #   items_with_revenue = collection.map { |item| [item, item.total_sold] }
+  #   items_with_revenue.max_by(n) { |item, total_sold| total_sold }.map(&:first)
+  # end
 
 end

@@ -7,7 +7,7 @@ class Transaction < ModelObject
               :cc_expiration_date,
               :result
 
-  def initialize(data, item_repo)
+  def initialize(data, transaction_repo)
     super
     @invoice_id         = data[:invoice_id].to_i
     @credit_card_number = data[:credit_card_number]

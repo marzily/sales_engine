@@ -39,4 +39,16 @@ class Invoice < ModelObject
     transactions.any? { |transaction| transaction.result == 'success' }
   end
 
+  def charge(card_info = {})
+    raise card_info.inspect
+    card_info[:id] 
+    card_info[:created_at]
+    card_info[:created_at]
+    card_info[:created_at]
+    card_info[:created_at]
+    card_info[:created_at]
+    card_info[:created_at]
+    Transaction.new(card_info, repository.engine.transaction_repository)
+  end
+
 end

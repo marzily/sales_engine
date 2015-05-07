@@ -16,7 +16,7 @@ class MerchantRepository < Repository
   def find_all_by_name(name)
     collection.select { |merchant| merchant.name.downcase == name.downcase }
   end
-#
+
 #   def most_revenue(n)
 #     merchant_revenue = {}
 #     collection.each do |merchant|
@@ -40,8 +40,8 @@ class MerchantRepository < Repository
 #     merchant_items.max_by(n) { |merchant, items_sold| items_sold }.map(&:first)
 #   end
 
-  # def revenue(date)
-  #   collection.inject(0) { |sum, merchant| sum + merchant.revenue(date) }
-  # end
+  def revenue(date)
+    collection.inject(0) { |sum, merchant| sum + merchant.revenue(date) }
+  end
 
 end

@@ -46,7 +46,7 @@ class ItemRepository < Repository
   #   items_with_revenue = collection.map { |item| [item, item.revenue] }
   #   items_with_revenue.max_by(n) { |item, revenue| revenue }.map(&:first)
   # end
-  #
+
   # def most_items(n)
   #   items_with_revenue = collection.map { |item| [item, item.total_sold] }
   #   items_with_revenue.max_by(n) { |item, total_sold| total_sold }.map(&:first)

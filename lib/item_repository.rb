@@ -27,7 +27,9 @@ class ItemRepository < Repository
   end
 
   def find_all_by_unit_price(unit_price)
-    collection.select { |invoice_item| invoice_item.unit_price == unit_price }
+    collection.select do |invoice_item|
+      invoice_item.unit_price == unit_price
+    end
   end
 
   def find_by_unit_price(unit_price)
@@ -35,21 +37,21 @@ class ItemRepository < Repository
   end
 
   def find_all_by_merchant_id(merchant_id)
-    collection.select { |invoice_item| invoice_item.merchant_id == merchant_id }
+    collection.select do |invoice_item|
+      invoice_item.merchant_id == merchant_id
+    end
   end
 
   def find_by_merchant_id(merchant_id)
     find_all_by_merchant_id(merchant_id).first
   end
 
-  # def most_revenue(n)
-  #   items_with_revenue = collection.map { |item| [item, item.revenue] }
-  #   items_with_revenue.max_by(n) { |item, revenue| revenue }.map(&:first)
-  # end
-  #
-  # def most_items(n)
-  #   items_with_revenue = collection.map { |item| [item, item.total_sold] }
-  #   items_with_revenue.max_by(n) { |item, total_sold| total_sold }.map(&:first)
-  # end
+  def most_revenue(n)
+    collection.max_by(n) { |item| item.revenue }
+  end
+
+  def most_items(n)
+    collection.max_by(n) { |item| item.total_sold }
+  end
 
 end

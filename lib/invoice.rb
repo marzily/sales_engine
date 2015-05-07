@@ -20,7 +20,7 @@ class Invoice < ModelObject
   end
 
   def items
-    invoice_items.map { |invoice_item| invoice_item.item }.compact
+    invoice_items.map(&:item).compact
   end
 
   def customer
@@ -37,18 +37,6 @@ class Invoice < ModelObject
 
   def success?
     transactions.any? { |transaction| transaction.result == 'success' }
-  end
-
-  def charge(card_info = {})
-    raise card_info.inspect
-    card_info[:id] 
-    card_info[:created_at]
-    card_info[:created_at]
-    card_info[:created_at]
-    card_info[:created_at]
-    card_info[:created_at]
-    card_info[:created_at]
-    Transaction.new(card_info, repository.engine.transaction_repository)
   end
 
 end

@@ -9,14 +9,13 @@ class MerchantRepository < Repository
     super
   end
 
-  def find_by_name(name)
-    find_all_by_name(name).first
+  def find_all_by_name(name)
+    @all_by_name ||= hash_repo("name")
+    @all_by_name[name]
   end
 
-  def find_all_by_name(name)
-    collection.select do |merchant|
-      merchant.name.downcase == name.downcase
-    end
+  def find_by_name(name)
+    find_all_by_name(name).first
   end
 
   def most_revenue(n)

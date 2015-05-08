@@ -2,7 +2,6 @@ require_relative 'model_object'
 require_relative 'transaction'
 
 class Invoice < ModelObject
-
   attr_reader :customer_id, :merchant_id, :status
 
   def initialize(data, invoice_repo)
@@ -32,12 +31,8 @@ class Invoice < ModelObject
     repository.engine.merchant_repository.find_by_id(merchant_id)
   end
 
-  def successful_transactions
-    transactions.select { |transaction| transaction.result == 'success' }
-  end
-
   def success?
-    transactions.any? { |transaction| transaction.result == 'success' }
+    transactions.any?(&:success?)
   end
 
   def charge(card_info = {})
@@ -48,7 +43,14 @@ class Invoice < ModelObject
     card_info[:created_at] = Time.now.to_s
     card_info[:updated_at] = Time.now.to_s
 
-    Transaction.new(card_info, transaction_repo)
+    new_trans = Transaction.new(card_info, transaction_repo)
+    transaction_repo.collection << new_trans
+
+    unless transaction_repo.all_by_invoice_id.has_key?(id)
+      transaction_repo.all_by_invoice_id[id] = [new_trans]
+    else
+      transaction_repo.all_by_invoice_id[id] << new_trans
+    end
   end
 
 end

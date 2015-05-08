@@ -10,40 +10,47 @@ class InvoiceRepository < Repository
     super
   end
 
+  def find_all_by_customer_id(customer_id)
+    @all_by_customer_id ||= hash_repo("customer_id")
+    @all_by_customer_id[customer_id]
+  end
+
   def find_by_customer_id(customer_id)
     find_all_by_customer_id(customer_id).first
+  end
+
+  def find_all_by_merchant_id(merchant_id)
+    @all_by_merchant_id ||= hash_repo("merchant_id")
+    @all_by_merchant_id[merchant_id]
   end
 
   def find_by_merchant_id(merchant_id)
     find_all_by_merchant_id(merchant_id).first
   end
 
+  def find_all_by_status(status)
+    @all_by_status ||= hash_repo("status")
+    @all_by_status[status]
+  end
+
   def find_by_status(status)
     find_all_by_status(status).first
-  end
-
-  def find_all_by_customer_id(customer_id)
-    collection.select { |invoice| invoice.customer_id == customer_id }
-  end
-
-  def find_all_by_merchant_id(merchant_id)
-    collection.select { |invoice| invoice.merchant_id == merchant_id }
-  end
-
-  def find_all_by_status(status)
-    collection.select { |invoice| invoice.status == status }
   end
 
   def create(invoice_info = {})
     invoice_info[:created_at]  = Time.now.to_s
     invoice_info[:updated_at]  = Time.now.to_s
-    invoice_info[:id]          = self.collection.last.id + 1
+    invoice_info[:id]          = all.last.id + 1
     invoice_info[:customer_id] = invoice_info[:customer].id
     invoice_info[:merchant_id] = invoice_info[:merchant].id
 
     engine.invoice_item_repository
           .create_invoice_item(invoice_info[:items], invoice_info[:id] )
-    Invoice.new(invoice_info, self)
+
+    new_invoice = Invoice.new(invoice_info, self)
+
+    collection << new_invoice
+    new_invoice
   end
 
 end

@@ -11,7 +11,8 @@ class InvoiceItemRepository < Repository
   end
 
   def find_all_by_item_id(item_id)
-    collection.select { |invoice_item| invoice_item.item_id == item_id }
+    @all_by_item_id ||= hash_repo("item_id")
+    @all_by_item_id[item_id]
   end
 
   def find_by_item_id(item_id)
@@ -19,7 +20,8 @@ class InvoiceItemRepository < Repository
   end
 
   def find_all_by_invoice_id(invoice_id)
-    collection.select { |invoice_item| invoice_item.invoice_id == invoice_id }
+    @all_by_invoice_id ||= hash_repo("invoice_id")
+    @all_by_invoice_id[invoice_id]
   end
 
   def find_by_invoice_id(invoice_id)
@@ -27,7 +29,8 @@ class InvoiceItemRepository < Repository
   end
 
   def find_all_by_quantity(quantity)
-    collection.select { |invoice_item| invoice_item.quantity == quantity }
+    @all_by_quantity ||= hash_repo("quantity")
+    @all_by_quantity[quantity]
   end
 
   def find_by_quantity(quantity)
@@ -36,7 +39,8 @@ class InvoiceItemRepository < Repository
 
   def find_all_by_unit_price(unit_price)
     price = BigDecimal.new(unit_price) / 100
-    collection.select { |invoice_item| invoice_item.unit_price == price }
+    @all_by_unit_price ||= hash_repo("unit_price")
+    @all_by_unit_price[price]
   end
 
   def find_by_unit_price(unit_price)
@@ -61,6 +65,12 @@ class InvoiceItemRepository < Repository
               }
       ii = InvoiceItem.new(data, self)
       collection << ii
+
+      unless @all_by_invoice_id.has_key?(invoice_id)
+        @all_by_invoice_id[invoice_id] = [ii]
+      else
+        @all_by_invoice_id[invoice_id] << ii
+      end
     end
   end
 end

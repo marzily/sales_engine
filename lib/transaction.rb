@@ -23,4 +23,8 @@ class Transaction < ModelObject
     invoice.merchant
   end
 
+  def success?
+    result == 'success'
+  end
+
 end

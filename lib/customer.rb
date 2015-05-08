@@ -1,7 +1,6 @@
 require_relative 'model_object'
 
 class Customer < ModelObject
-
   attr_reader :first_name, :last_name
 
   def initialize(data, repository)
@@ -18,13 +17,13 @@ class Customer < ModelObject
     invoices.flat_map(&:transactions)
   end
 
-  def favorite_merchant
-    successful_transactions = transactions.select do |transaction|
-      transaction.result == 'success'
-    end
+  def successful_transactions
+    transactions.select(&:success?)
+  end
 
+  def favorite_merchant
+    # group_by
     merchants = successful_transactions.map(&:merchant)
     merchants.max_by { |merchant| merchants.count(merchant) }
   end
-
 end

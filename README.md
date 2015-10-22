@@ -1,23 +1,19 @@
 # Sales Engine
 
-(insert project completion goals for first check-in here)
+##### Stack: Ruby, CSV
 
-(insert project completion goals for second check-in here)
+Ruby implementation of a database designed to store sales data for customers, merchants, and transactions.
 
-# Check-in Rubrics
+Sales Engine holds 35,708 lines of data without a SQL database. All data is imported from CSV and stored in hash objects.
 
-### Feature Delivery Rubric
+Business logic is built into project to extract information such as most popular sales item and date for the most sales transactions.
 
-You’ll be graded on each of the criteria below with a score of (1) well below expectations, (2) below expectations, (3) as expected, (4) better than expected.
+#### To set up project:
+* Clone repository.
+* In command line: `$ bundle install`
 
-* Completion: did you deliver what you committed to build?
+#### Testing
+* Fixtures have been created in test folder for testing purposes.
+* To run tests, type `$ rake` in command line.
 
-* Organization: did you use your project management tool to keep the project organized?
-
-* Progress: are you on track to finish the project on time? Will/does the end product realize the vision of the concept?
-
-### Technical Quality Rubric
-
-* Test-Driven Development: (1) disregard for testing, (2) gaps in test usage/coverage/design, (3) adequate testing, (4) exceptional use of testing
-
-* Code Quality: (1) poor factoring and understanding of MVC, (2) some gaps in code quality / application of MVC, (3) solid code quality and pushing logic down the stack, (4) exceptionally well factored code
+The original project spec can be found [here](http://tutorials.jumpstartlab.com/projects/sales_engine.html).

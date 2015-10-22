@@ -1,6 +1,6 @@
 require_relative 'repository'
 require_relative 'item'
-require "bigdecimal"
+require 'bigdecimal'
 
 class ItemRepository < Repository
   attr_reader :model_class
